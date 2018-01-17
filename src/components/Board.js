@@ -12,6 +12,7 @@ export default class Board extends React.Component {
             squareClick={this.props.onClick}
             cols={this.props.cols}
             squares={this.props.squares}
+            winningSquares={this.props.winningSquares}
           />
         )}
       </div>

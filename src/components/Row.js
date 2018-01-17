@@ -1,13 +1,19 @@
 import React from 'react';
 import Square from './Square';
+import _ from 'lodash'
 
 export default class Row extends React.Component {
   renderSquare(row, col) {
+    const isWinSquare = () => {
+      const winningSquares = this.props.winningSquares;
+      return this.props.winningSquares && _.includes(winningSquares, `${row}-${col}`)
+    }
     return (
       <Square
         key={`${row}_${col}`}
         value={this.props.squares[`${row}-${col}`]}
         onClick={() => this.props.squareClick(row, col)}
+        isWinSquare={isWinSquare()}
       />
     )
   }
