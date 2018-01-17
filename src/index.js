@@ -5,4 +5,4 @@ import './index.css';
 
 const mountElement = document.getElementById('root');
 
-ReactDOM.render(<Game />, mountElement);
+ReactDOM.render(<Game rows={50} cols={50} />, mountElement);

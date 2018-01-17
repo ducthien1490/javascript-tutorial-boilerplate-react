@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Board from './Board';
 import calculateWinner from '../calculateWinner'
+import buildSquare from '../buildSquare'
 import './Game.css';
 
 export default class Game extends React.Component {
@@ -8,21 +10,21 @@ export default class Game extends React.Component {
     super(props);
     this.state = {
       history: [{
-        squares: Array(9).fill(null)
+        squares: buildSquare(this.props.rows, this.props.cols)
       }],
       stepNumber: 0,
       xIsNext: true
     };
   }
 
-  handleClick(i) {
+  handleClick(row, col) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    const squares = Object.assign({}, current.squares);
+    if (calculateWinner(squares) || squares[`${row}-${col}`]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    squares[`${row}-${col}`] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
       history: history.concat([{squares: squares}]),
       stepNumber: history.length,
@@ -61,7 +63,9 @@ export default class Game extends React.Component {
         <div className="game-board">
           <Board
             squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
+            onClick={(row, col) => this.handleClick(row, col)}
+            rows={this.props.rows}
+            cols={this.props.cols}
           />
         </div>
         <div className="game-info">
@@ -71,4 +75,9 @@ export default class Game extends React.Component {
       </div>
     );
   }
+}
+
+Game.propTypes = {
+  rows: PropTypes.number,
+  cols: PropTypes.number
 }

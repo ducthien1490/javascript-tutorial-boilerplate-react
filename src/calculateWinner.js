@@ -1,3 +1,5 @@
+import _ from 'lodahs';
+
 export default function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -17,4 +19,9 @@ export default function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+function checkWinner(squares, row, col) {
+  const colsRange = _.filter(_.range(col - 2, row + 3), (val) => { return val >= 0});
+  const rowsRange = _.filter(_.range(row - 2, row + 3), (val) => { return val >= 0});
 }
