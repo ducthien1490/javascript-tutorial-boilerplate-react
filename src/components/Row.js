@@ -8,12 +8,16 @@ export default class Row extends React.Component {
       const winningSquares = this.props.winningSquares;
       return this.props.winningSquares && _.includes(winningSquares, `${row}-${col}`)
     }
+    const isCurrentMove = () => {
+      return `${row}-${col}` === this.props.currentMove;
+    }
     return (
       <Square
         key={`${row}_${col}`}
         value={this.props.squares[`${row}-${col}`]}
         onClick={() => this.props.squareClick(row, col)}
         isWinSquare={isWinSquare()}
+        isCurrentMove={isCurrentMove()}
       />
     )
   }

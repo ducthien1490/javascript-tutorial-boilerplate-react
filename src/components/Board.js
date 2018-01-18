@@ -13,6 +13,7 @@ export default class Board extends React.Component {
             cols={this.props.cols}
             squares={this.props.squares}
             winningSquares={this.props.winningSquares}
+            currentMove={this.props.currentMove}
           />
         )}
       </div>

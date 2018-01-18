@@ -51,3 +51,6 @@ ol, ul {
 .win-square {
   color: red;
 }
+.current-move {
+  background: yellow;
+}
